@@ -1,0 +1,6 @@
+framework module Pods_WizTestTests {
+  umbrella header "Pods-WizTestTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
