@@ -28,7 +28,7 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Pixabay Gallery"
         NetworkService.shared.startNetworkReachabilityObserver()
-        photosCollectionView.collectionViewLayout = LeftAlignFlowLayout()
+//        photosCollectionView.collectionViewLayout = LeftAlignFlowLayout()
         photosCollectionView.delegate = self
         photosCollectionView.dataSource = self
         photosCollectionView.register(PhotoCollectionViewCell.nib, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
