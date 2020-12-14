@@ -50,7 +50,7 @@ class PhotosViewController: UIViewController {
                 self?.photos.removeAll()
                 
             }
-            self?.lastCount = photos.count
+            self?.lastCount = self?.photos.count ?? 0
             self?.photos.append(contentsOf: photos)
             if self?.currentPage == 1 {
                 self?.photosCollectionView?.reloadData()
