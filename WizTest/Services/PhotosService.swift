@@ -35,7 +35,7 @@ class PhotosService {
         limit       = apiLimit
     }
     
-    func getPhotos(page: Int, completion: @escaping (_ photos: [Photo], _ sucsses:Bool)->Void) -> Void {
+    func getPhotos(page: Int, completion: @escaping (_ photos: [Photo], _ sucsses:Bool)->Void) {
         
         let parameters : [String: Any] = [
             apiKey:             apiKeyValue,

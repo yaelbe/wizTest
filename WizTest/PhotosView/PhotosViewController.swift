@@ -36,32 +36,33 @@ class PhotosViewController: UIViewController {
     }
     
     //TODO: need to add this to view model
-    func getPhotos(completion: ((_ success: Bool) -> Void)?) -> Void {
+    func getPhotos(completion: ((_ success: Bool) -> Void)?) {
         //guard let searchText = searchText else { return }
         activityIndicator.startAnimating()
         activityIndicator.isHidden = false
         PhotosService.shared.getPhotos(page: currentPage, completion: { [weak self] photos , success in
-            self?.activityIndicator.stopAnimating()
-            self?.activityIndicator.isHidden = true
-            if self?.currentPage == 1 {
-                if((self?.photos.count ?? 0) > 0){ //scroll to start if this is a new serch
-                    self?.photosCollectionView?.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+            guard let self = self else { return}
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.isHidden = true
+            if self.currentPage == 1 {
+                if((self.photos.count ) > 0){ //scroll to start if this is a new serch
+                    self.photosCollectionView?.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
                 }
-                self?.photos.removeAll()
+                self.photos.removeAll()
                 
             }
-            self?.lastCount = self?.photos.count ?? 0
-            self?.photos.append(contentsOf: photos)
-            if self?.currentPage == 1 {
-                self?.photosCollectionView?.reloadData()
+            self.lastCount = self.photos.count
+            self.photos.append(contentsOf: photos)
+            if self.currentPage == 1 {
+                self.photosCollectionView?.reloadData()
             } else {
-                self?.insertPhotos()
+                self.insertPhotos()
             }
             
             if(!success){
                 let alert = UIAlertController(title: "No Internet Connection", message: "Retry later", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK 👍", style: .default, handler: nil))
-                self?.present(alert, animated: true)
+                self.present(alert, animated: true)
             }
             completion?(success)
         })
